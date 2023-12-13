@@ -4,7 +4,7 @@ import Button from "./components/Button"
 import Header from "./components/Header"
 
 export default function App() {
-  const [numOfArticles, setNumOfArticles] = React.useState(0)
+  const [numOfArticles, setNumOfArticles] = React.useState(4)
   const [currentArticles, setCurrentArticles] = React.useState(
     getArticles(numOfArticles)
   )
@@ -22,6 +22,14 @@ export default function App() {
 		3. If numOfArticles (line 7) stays the same number (4), the app should look identical after 
 		   completing these tasks. However, if numOfArticles is changed to a higher or lower number,a corresponding number of list items should be rendered. Test this!  
 */
+  const articlesListItems = currentArticles.map(({ link, title, id }) => (
+    <li className="article" key={id}>
+      <a href={link} target="_blank">
+        {title}
+      </a>
+    </li>
+  ))
+
   return (
     <div className="wrapper">
       <Header />
@@ -29,17 +37,7 @@ export default function App() {
         <ul>
           {/*------------List items below!-------------------------------------------------------*/}
 
-          {currentArticles.length > 0 ? (
-            currentArticles.map((article) => (
-              <li className="article">
-                <a href={article.link} target="_blank">
-                  {article.title}
-                </a>
-              </li>
-            ))
-          ) : (
-            <li className="article">No articles</li>
-          )}
+          {articlesListItems}
 
           {/*------------List items above!-------------------------------------------------------*/}
         </ul>
